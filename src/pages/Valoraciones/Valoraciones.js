@@ -12,12 +12,12 @@ import {
 } from "reactstrap";
 
 const data = [
-  { id: 1, Ingrediente: "Masa", Medida: "160 gr" },
-  { id: 2, Ingrediente: "Vegetales", Medida: "30 gr" },
-  { id: 3, Ingrediente: "Aceite de oliva", Medida: "250 ml" },
-  { id: 4, Ingrediente: "Agua", Medida: "250 ml" },
-  { id: 5, Ingrediente: "Levadura seca", Medida: "50 gr"},
-  { id: 6, Ingrediente: "Queso", Medida: "250 gr" },
+  { nombre: 1, Repartidor: "Alejandro Valencia", Valoracion: "★★★★☆" },
+  { nombre: 2, Repartidor: "Ricardo Montes", Valoracion: "★★★★☆" },
+  { nombre: 3, Repartidor: "Ivanna Sanchez", Valoracion: "★★★★★" },
+  { nombre: 4, Repartidor: "Lucia Garcia", Valoracion: "★★★★☆" },
+  { nombre: 5, Repartidor: "Ernesto Torres", Valoracion: "★★★☆☆"},
+  { nombre: 6, Repartidor: "Ingrid Campos", Valoracion: "★★★★★" },
 ];
 
 class App extends React.Component {
@@ -26,9 +26,9 @@ class App extends React.Component {
     modalActualizar: false,
     modalInsertar: false,
     form: {
-      id: "",
-      Ingrediente: "",
-      Medida: "",
+        nombre: "",
+        Repartidor: "",
+        Valoracion: "",
     },
   };
 
@@ -57,9 +57,9 @@ class App extends React.Component {
     var contador = 0;
     var arreglo = this.state.data;
     arreglo.map((registro) => {
-      if (dato.id == registro.id) {
-        arreglo[contador].Ingrediente = dato.Ingrediente;
-        arreglo[contador].Medida = dato.Medida;
+      if (dato.nombre == registro.nombre) {
+        arreglo[contador].Repartidor = dato.Repartidor;
+        arreglo[contador].Valoracion = dato.Valoracion;
       }
       contador++;
     });
@@ -67,12 +67,12 @@ class App extends React.Component {
   };
 
   eliminar = (dato) => {
-    var opcion = window.confirm("Estás Seguro que deseas eliminar el producto "+dato.id);
+    var opcion = window.confirm("Estás seguro que deseas eliminar la valoracion "+dato.nombre);
     if (opcion == true) {
       var contador = 0;
       var arreglo = this.state.data;
       arreglo.map((registro) => {
-        if (dato.id == registro.id) {
+        if (dato.nombre == registro.nombre) {
           arreglo.splice(contador, 1);
         }
         contador++;
@@ -83,7 +83,7 @@ class App extends React.Component {
 
   insertar= ()=>{
     var valorNuevo= {...this.state.form};
-    valorNuevo.id=this.state.data.length+1;
+    valorNuevo.nombre=this.state.data.length+1;
     var lista= this.state.data;
     lista.push(valorNuevo);
     this.setState({ modalInsertar: false, data: lista });
@@ -104,33 +104,33 @@ class App extends React.Component {
       <>
         <Container>
         <br />
-          <Button color="dark" onClick={()=>this.mostrarModalInsertar()}>Agregar producto</Button>
+          <Button color="info" onClick={()=>this.mostrarModalInsertar()}> Agrega una nueva valoracion</Button>
           <br />
           <br />
           <Table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Ingrediente</th>
-                <th>Medida</th>
+                <th>ID de repartidor</th>
+                <th>Repartidor</th>
+                <th>Valoraciones</th>
                 <th>Acción</th>
               </tr>
             </thead>
 
             <tbody>
               {this.state.data.map((dato) => (
-                <tr key={dato.id}>
-                  <td>{dato.id}</td>
-                  <td>{dato.Ingrediente}</td>
-                  <td>{dato.Medida}</td>
+                <tr key={dato.nombre}>
+                  <td>{dato.nombre}</td>
+                  <td>{dato.Repartidor}</td>
+                  <td>{dato.Valoracion}</td>
                   <td>
                     <Button
-                      color="light"
+                      color="primary"
                       onClick={() => this.mostrarModalActualizar(dato)}
                     >
                       Editar
                     </Button>{" "}
-                    <Button color="secondary" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                    <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
                   </td>
                 </tr>
               ))}
@@ -146,40 +146,40 @@ class App extends React.Component {
           <ModalBody>
             <FormGroup>
               <label>
-               ID:
+              nombre:
               </label>
             
               <input
                 className="form-control"
                 readOnly
                 type="text"
-                value={this.state.form.id}
+                value={this.state.form.nombre}
               />
             </FormGroup>
             
             <FormGroup>
               <label>
-                Ingrediente: 
+              Repartidor: 
               </label>
               <input
                 className="form-control"
-                name="Ingrediente"
+                name="Repartidor"
                 type="text"
                 onChange={this.handleChange}
-                value={this.state.form.Ingrediente}
+                value={this.state.form.Repartidor}
               />
             </FormGroup>
             
             <FormGroup>
               <label>
-              Medida: 
+              Valoraciones: 
               </label>
               <input
                 className="form-control"
-                name="Medida"
+                name="Valoracion"
                 type="text"
                 onChange={this.handleChange}
-                value={this.state.form.Medida}
+                value={this.state.form.Valoracion}
               />
             </FormGroup>
           </ModalBody>
@@ -204,13 +204,13 @@ class App extends React.Component {
 
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
-           <div><h3>Insertar producto para almacen</h3></div>
+           <div><h3>Agregar una nueva valoracion</h3></div>
           </ModalHeader>
 
           <ModalBody>
             <FormGroup>
               <label>
-                ID: 
+              ID del repartidor: 
               </label>
               
               <input
@@ -223,11 +223,11 @@ class App extends React.Component {
             
             <FormGroup>
               <label>
-                Ingrediente: 
+              Repartidor: 
               </label>
               <input
                 className="form-control"
-                name="Ingrediente"
+                name="Repartidor"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -235,11 +235,11 @@ class App extends React.Component {
             
             <FormGroup>
               <label>
-              Medida: 
+              Valoraciones: 
               </label>
               <input
                 className="form-control"
-                name="Medida"
+                name="Valoracion"
                 type="text"
                 onChange={this.handleChange}
               />

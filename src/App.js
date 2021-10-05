@@ -5,8 +5,7 @@ import Almacen from '../src/pages/Almacen'
 import Pedidos from '../src/pages/Pedidos'
 import Productos from '../src/pages/Productos'
 import Reservas from '../src/pages/Reservas'
-import Valoraciones from '../src/pages/Valoraciones'
-
+import Valoraciones from '../src/pages/Valoraciones/Valoraciones'
 import './App.scss';
 
 
