@@ -6,10 +6,12 @@
 }
 
 body {
+  text-decoration: none;
   font-family: 'Rubik', sans-serif;
+  background-color: rgb(228, 228, 228);
 }
-$light: #ffffff;
-$gray: #c4ccde;
+$light: white;
+$gray: #ffffff;
 
 .flex
 {
@@ -17,11 +19,15 @@ $gray: #c4ccde;
 }
 
 .navbar {
-  background-color: $light;
+  text-decoration: none;
+  background-color: rgb(139, 187, 197);
   padding: 1rem 2rem;
   border-bottom: 1px solid $gray;
+  
 }
 .sidebar{
+  background-color: rgb(139, 187, 197);
+  text-decoration: none;
   width: 14em;
   height: calc(100vh - 52px);
   border-right: 1px solid $gray;

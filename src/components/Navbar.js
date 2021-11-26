@@ -1,7 +1,7 @@
 const Navbar = () => {
     return(
         <div className="navbar">
-            App: Mochuelo
+            <a href="index1.js">App Mochuelo</a>
         </div>
     )
 }
